@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Paladyn
@@ -9,6 +10,7 @@ namespace Paladyn
     class Textgen
     {
         const string symbols = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        string _txt;
         private string GenText()
         {
             Random r = new Random();
@@ -22,6 +24,20 @@ namespace Paladyn
                 sb.Append(b);
             }
             return sb.ToString();
+        }
+
+        internal void Live()
+        {
+            while (true)
+            {
+                _txt = GenText();
+                Thread.Sleep(500);
+            }
+        }
+
+        public Textgen()
+        {
+            
         }
 
     }

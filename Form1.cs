@@ -12,9 +12,18 @@ namespace Paladyn
 {
     public partial class frmMain : Form
     {
+        God god;
         public frmMain()
         {
             InitializeComponent();
+            god = new God();
+        }
+
+        private void bAddThread_Click(object sender, EventArgs e)
+        {
+            Textgen textgen = new Textgen();
+            god.Genesis(textgen);
+            lbThread.DataSource = god.ListTextgens();
         }
     }
 }

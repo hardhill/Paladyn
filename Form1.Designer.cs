@@ -40,6 +40,7 @@
             this.bAddThread.TabIndex = 1;
             this.bAddThread.Text = "New thread";
             this.bAddThread.UseVisualStyleBackColor = true;
+            this.bAddThread.Click += new System.EventHandler(this.bAddThread_Click);
             // 
             // lbThread
             // 
