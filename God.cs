@@ -38,6 +38,30 @@ namespace Paladyn
             }
             return otvet;
         }
+
+        internal void Kill(int i)
+        {
+           Thread tr = threads[i];
+            if (tr.IsAlive)
+            {
+                try
+                {
+                    tr.Interrupt();
+                    tr.Abort();
+                }
+                catch(Exception ex)
+                {
+
+                }
+                finally
+                {
+                    
+                }
+                
+                threads.Remove(tr);
+            }
+            
+        }
     }
     
 }
