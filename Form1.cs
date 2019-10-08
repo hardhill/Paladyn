@@ -25,5 +25,12 @@ namespace Paladyn
             god.Genesis(textgen);
             lbThread.DataSource = god.ListTextgens();
         }
+
+        private void lbThread_DoubleClick(object sender, EventArgs e)
+        {
+            int i = lbThread.SelectedIndex;
+            god.Kill(i);
+            lbThread.DataSource = god.ListTextgens();
+        }
     }
 }

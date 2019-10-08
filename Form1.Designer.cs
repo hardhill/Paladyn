@@ -49,6 +49,7 @@
             this.lbThread.Name = "lbThread";
             this.lbThread.Size = new System.Drawing.Size(235, 342);
             this.lbThread.TabIndex = 2;
+            this.lbThread.DoubleClick += new System.EventHandler(this.lbThread_DoubleClick);
             // 
             // frmMain
             // 
