@@ -10,29 +10,34 @@ namespace Paladyn
     class God
     {
         const int MAX_ENTIES = 20;
-        private List<Thread> threads;
+        private List<Task> tasks;
+
         public God()
         {
-            threads = new List<Thread>(MAX_ENTIES);
+            tasks = new List<Task>(MAX_ENTIES);
         }
 
-        public List<Thread> GetTread()
+        public List<Task> GetTread()
         {
-            return threads;
+            return tasks;
         }
 
         public int Genesis(Textgen textgen)
         {
-            Thread thread = new Thread(new ThreadStart(textgen.Live));
-            threads.Add(thread);
-            thread.Start();
-            return threads.Count;
+            var token = new CancellationTokenSource();
+            CancellationToken cancelToken = token.Token;
+
+            Task task = new Task(textgen.Live, token.Token);
+            
+            tasks.Add(task);
+            task.Start();
+            return tasks.Count;
         }
 
         public List<String> ListTextgens()
         {
             List<String> otvet = new List<String>();
-            for(int i = 0; i < threads.Count; i++)
+            for(int i = 0; i < tasks.Count; i++)
             {
                 otvet.Add(i.ToString());
             }
@@ -41,26 +46,9 @@ namespace Paladyn
 
         internal void Kill(int i)
         {
-           Thread tr = threads[i];
-            if (tr.IsAlive)
-            {
-                try
-                {
-                    tr.Interrupt();
-                    tr.Abort();
-                }
-                catch(Exception ex)
-                {
-
-                }
-                finally
-                {
-                    
-                }
-                
-                threads.Remove(tr);
-            }
-            
+            Task task = tasks[i];
+            task = null;
+            tasks.RemoveAt(i);
         }
     }
     
